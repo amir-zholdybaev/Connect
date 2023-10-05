@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'drf_spectacular',
+    'groups',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,23 @@ DATABASES = {
     }
 }
 
+# DB_NAME = os.getenv('DB_NAME')
+# DB_OWNER_NAME = os.getenv('DB_OWNER_NAME')
+# DB_OWNER_PASSWORD = os.getenv('DB_OWNER_PASSWORD')
+# POSTGRES_HOST = os.getenv('POSTGRES_HOST')
+# POSTGRES_PORT = os.getenv('POSTGRES_PORT')
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME,
+#         'USER': DB_OWNER_NAME,
+#         'PASSWORD': DB_OWNER_PASSWORD,
+#         'HOST': POSTGRES_HOST,
+#         'PORT': POSTGRES_PORT,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
