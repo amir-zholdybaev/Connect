@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'drf_spectacular',
-    'groups',
+    'communities',
 ]
+
+# AUTH_USER_MODEL = 'communities.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,6 +92,7 @@ DATABASES = {
     }
 }
 
+
 # DB_NAME = os.getenv('DB_NAME')
 # DB_OWNER_NAME = os.getenv('DB_OWNER_NAME')
 # DB_OWNER_PASSWORD = os.getenv('DB_OWNER_PASSWORD')
@@ -107,6 +110,7 @@ DATABASES = {
 #         'PORT': POSTGRES_PORT,
 #     }
 # }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
