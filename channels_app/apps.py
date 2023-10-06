@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CommunitiesConfig(AppConfig):
+class ChannelsAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'communities'
+    name = 'channels_app'

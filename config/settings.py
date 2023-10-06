@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'drf_spectacular',
-    'communities',
+    'channels_app',
 ]
 
-# AUTH_USER_MODEL = 'communities.User'
+# AUTH_USER_MODEL = 'channels_app.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
