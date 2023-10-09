@@ -45,3 +45,18 @@ class Post(models.Model):
     title = models.CharField(_('title'), max_length=150, blank=True, null=True)
     body = models.TextField(_('body'), blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Comment(models.Model):
+    body = models.TextField()
+    author = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name="comments",
+    )
+    post = models.ForeignKey(
+        to=Post,
+        on_delete=models.CASCADE,
+        related_name="comments",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
