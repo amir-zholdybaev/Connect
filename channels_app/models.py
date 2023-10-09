@@ -47,6 +47,36 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+class Reaction(models.Model):
+    class Values(models.TextChoices):
+        SMILE = "smile", "Улыбка"
+        THUMB_UP = "thumb_up", "Большой палец вверх"
+        LAUGH = "laugh", "Смех"
+        SAD = "sad", "Грусть"
+        HEART = "heart", "Сердце"
+
+    value = models.CharField(max_length=8, choices=Values.choices, null=True)
+    author = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name="reactions",
+    )
+    post = models.ForeignKey(
+        to=Post,
+        on_delete=models.CASCADE,
+        related_name="reactions",
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                "author",
+                "post",
+                name="author_post_unique",
+            ),
+        ]
+
+
 class Comment(models.Model):
     body = models.TextField()
     author = models.ForeignKey(
