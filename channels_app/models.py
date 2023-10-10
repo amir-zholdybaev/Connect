@@ -1,5 +1,5 @@
 from django.db import models
-from general_app.models import User
+from users_app.models import User
 from django.utils.translation import gettext_lazy as _
 
 
@@ -7,40 +7,40 @@ class Channel(models.Model):
     name = models.CharField(_('name'), max_length=150)
     description = models.TextField()
     owner = models.ForeignKey(
-        _('owner'),
         to=User,
         on_delete=models.CASCADE,
         related_name="channels",
+        verbose_name=_('owner'),
         default=1
     )
     admins = models.ManyToManyField(
-        _('administrators'),
         to=User,
         related_name='admin_channels',
+        verbose_name=_('administrators'),
         null=True
     )
     subscribers = models.ManyToManyField(
-        _('subscribers'),
         to=User,
         related_name='subscriber_channels',
+        verbose_name=_('subscribers'),
         null=True
     )
 
 
 class Post(models.Model):
     channel = models.ForeignKey(
-        _('channel'),
         to=Channel,
         on_delete=models.CASCADE,
         related_name="posts",
+        verbose_name=_('channel'),
         default=1
     )
     author = models.ForeignKey(
-        _('author'),
         to=User, 
         on_delete=models.CASCADE,
         related_name="posts",
-        default=1
+        verbose_name=_('author'),
+        default=1,
     )
     title = models.CharField(_('title'), max_length=150, blank=True, null=True)
     body = models.TextField(_('body'), blank=True, null=True)

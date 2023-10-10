@@ -7,7 +7,7 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    path('', include('general_app.urls'), name='general'),
+    path('', include('users_app.urls'), name='general'),
     path('admin/', admin.site.urls),
     path('channels/', include('channels_app.urls'), name='channels'),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

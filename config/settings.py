@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_spectacular',
-    'general_app',
+    'users_app',
     'channels_app',
     'debug_toolbar',
 ]
 
-AUTH_USER_MODEL = 'general_app.User'
+AUTH_USER_MODEL = 'users_app.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
