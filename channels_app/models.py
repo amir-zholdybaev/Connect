@@ -25,6 +25,10 @@ class Channel(models.Model):
         verbose_name=_('subscribers'),
         blank=True
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Post(models.Model):
@@ -44,6 +48,9 @@ class Post(models.Model):
         verbose_name=_('author')
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class Reaction(models.Model):
@@ -73,6 +80,9 @@ class Reaction(models.Model):
                 name="author_post_unique",
             ),
         ]
+    
+    def __str__(self) -> str:
+        return self.value
 
 
 class Comment(models.Model):
@@ -90,3 +100,9 @@ class Comment(models.Model):
         verbose_name=_('post')
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        if len(self.body) > 25:
+            return f'{self.body[:25]}...'
+        
+        return self.body
