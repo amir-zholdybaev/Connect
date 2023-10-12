@@ -1,70 +1,68 @@
 from django.db import models
-from users_app.models import User
 from django.utils.translation import gettext_lazy as _
+
+from users_app.models import User
 
 
 class Channel(models.Model):
     name = models.CharField(_('name'), max_length=150)
-    description = models.TextField()
+    description = models.TextField(_('description'), blank=True)
     owner = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
         related_name="channels",
-        verbose_name=_('owner'),
-        default=1
+        verbose_name=_('owner')
     )
     admins = models.ManyToManyField(
         to=User,
         related_name='admin_channels',
         verbose_name=_('administrators'),
-        null=True
+        blank=True
     )
     subscribers = models.ManyToManyField(
         to=User,
         related_name='subscriber_channels',
         verbose_name=_('subscribers'),
-        null=True
+        blank=True
     )
 
 
 class Post(models.Model):
+    title = models.CharField(_('title'), max_length=150, blank=True)
+    body = models.TextField(_('body'), blank=True)
+    image = models.ImageField(blank=True, upload_to='images')
     channel = models.ForeignKey(
         to=Channel,
         on_delete=models.CASCADE,
         related_name="posts",
-        verbose_name=_('channel'),
-        default=1
+        verbose_name=_('channel')
     )
     author = models.ForeignKey(
         to=User, 
         on_delete=models.CASCADE,
         related_name="posts",
-        verbose_name=_('author'),
-        default=1,
+        verbose_name=_('author')
     )
-    title = models.CharField(_('title'), max_length=150, blank=True, null=True)
-    body = models.TextField(_('body'), blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Reaction(models.Model):
     class Values(models.TextChoices):
-        SMILE = "smile", "Улыбка"
-        THUMB_UP = "thumb_up", "Большой палец вверх"
-        LAUGH = "laugh", "Смех"
-        SAD = "sad", "Грусть"
-        HEART = "heart", "Сердце"
+        THUMB_UP = "thumb up", _("thumb up")
+        THUMB_DOWN = "thumb down", _("thumb down")
 
-    value = models.CharField(max_length=8, choices=Values.choices, null=True)
+    value = models.CharField(max_length=10, choices=Values.choices)
     author = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
         related_name="reactions",
+        verbose_name=_('author')
     )
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
         related_name="reactions",
+        verbose_name=_('post')
     )
 
     class Meta:
@@ -83,10 +81,12 @@ class Comment(models.Model):
         to=User,
         on_delete=models.CASCADE,
         related_name="comments",
+        verbose_name=_('author')
     )
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
         related_name="comments",
+        verbose_name=_('post')
     )
     created_at = models.DateTimeField(auto_now_add=True)

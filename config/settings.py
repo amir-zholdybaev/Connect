@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'users_app',
     'channels_app',
+    'gallery_app',
     'debug_toolbar',
 ]
 
@@ -158,6 +159,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 
 REST_FRAMEWORK = {
