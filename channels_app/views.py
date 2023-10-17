@@ -3,5 +3,4 @@ from .models import Channel, Post
 
   
 def index(request):
-    post = Post.objects.get(pk=1)
-    return HttpResponse(f'<img src="{post.image.url}">')
+    return HttpResponse(f'Hello Channels')
