@@ -5,24 +5,22 @@ from users_app.models import User
 
 
 class Channel(models.Model):
-    name = models.CharField(_('name'), max_length=150)
-    description = models.TextField(_('description'), blank=True)
+    name = models.CharField('Название', max_length=150)
+    description = models.TextField('Описание', blank=True)
     owner = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
         related_name="channels",
-        verbose_name=_('owner')
+        verbose_name='Владелец',
     )
     admins = models.ManyToManyField(
         to=User,
         related_name='admin_channels',
-        verbose_name=_('administrators'),
         blank=True
     )
     subscribers = models.ManyToManyField(
         to=User,
         related_name='subscriber_channels',
-        verbose_name=_('subscribers'),
         blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,13 +37,11 @@ class Post(models.Model):
         to=Channel,
         on_delete=models.CASCADE,
         related_name="posts",
-        verbose_name=_('channel')
     )
     author = models.ForeignKey(
         to=User, 
         on_delete=models.CASCADE,
         related_name="posts",
-        verbose_name=_('author')
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -63,13 +59,11 @@ class Reaction(models.Model):
         to=User,
         on_delete=models.CASCADE,
         related_name="reactions",
-        verbose_name=_('author')
     )
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
         related_name="reactions",
-        verbose_name=_('post')
     )
 
     class Meta:
@@ -91,13 +85,11 @@ class Comment(models.Model):
         to=User,
         on_delete=models.CASCADE,
         related_name="comments",
-        verbose_name=_('author')
     )
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
         related_name="comments",
-        verbose_name=_('post')
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
